@@ -1,20 +1,34 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Introduction
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+This repository is providing the infrastructure pipeline and root Infra as Code for the Fizz Buzz API.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+## How to run
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+**On Mac**
+Provide your set of variables in the file `variables.tfvars`. Then run the following:
+    ```
+        bash run.sh
+    ```
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+**TODO: for Linux and Windows**
+Add some code for running on different OS.
+
+## How to begin
+
+1. create a service principle with the appropriate permissions (Contributor) on the subscription level.
+
+## Components
+
+1. Azure DevOps Agent
+1. Azure App Service Plan
+1. Azure App Service
+
+## Reasoning
+
+This application is currently small and requires a few testing environments. If, however, it ever happend that the application should grow and more traffic got through the website, it would be advisable to deploy this app to an AKS cluster and, depending on the region, create CDNs in appropriate regions. For this to happen an appropriate network would have to be introduced with load balancers or other NVAs. Also a process of canary release should be introduced if the application grows big, where only a fraction of users get to use the new release at a time to prevent any uncontrollable damage.
+
+## Improvements
+
+1. Finish monitoring:
+    * add alerts and groups
+    * 

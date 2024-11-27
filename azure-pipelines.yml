@@ -1,0 +1,35 @@
+trigger:
+  branches:
+    include:
+      - main
+      - releases/*
+      - hotfix/*
+      - feature/*
+      - bugfix/*
+      - pr/*
+pr:
+  - '*'
+  
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - checkout: self
+    persistCredentials: true
+    clean: true
+  - script: |
+        curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+    displayName: 'Install  tflint'
+
+  - script: |
+      tflint --recursive --config "$(pwd)/.tflint.hcl" > tflint_output.txt
+      if [ -s tflint_output.txt ]; then
+        cat tflint_output.txt
+        exit 1
+      else
+        echo "No TFLint issues found."
+      fi
+    displayName: 'Run TFLint'
+
+
+## TODO: add terraform plan and apply steps
